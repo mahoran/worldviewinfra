@@ -1,0 +1,111 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "vnetName": {
+        "value": "vnetCOMMERCE-CENTRAL"
+      },
+      "vnetAddressPrefix": {
+        "value": "10.70.0.0/16"
+      },
+      "subnet1Name": {
+        "value": "snCOMMERCE-DEFAULT"
+      },
+      "subnet1Prefix": {
+        "value": "10.70.0.0/24"
+      },
+      "subnet2Name": {
+        "value": "snCOM-APPGW-CENTRAL"
+      },
+      "subnet2Prefix": {
+        "value": "10.70.10.0/24"
+      },
+      "subnet3Name": {
+        "value": "snCOM-DBS-CENTRAL"
+      },
+      "subnet3Prefix": {
+        "value": "10.70.20.0/24"
+      },
+      "subnet4Name": {
+        "value": "snCOM-WEB-CENTRAL"
+      },
+      "subnet4Prefix": {
+        "value": "10.70.30.0/24"
+      },
+      "subnet5Name": {
+        "value": "snCOM-APP-CENTRAL"
+      },
+      "subnet5Prefix": {
+        "value": "10.70.40.0/24"
+      },
+      "subnet6Name": {
+        "value": "snCOM-FTP-CENTRAL"
+      },
+      "subnet6Prefix": {
+        "value": "10.70.50.0/24"
+      },
+      "subnet7Name": {
+        "value": "snCOM-PROC-CENTRAL"
+      },
+      "subnet7Prefix": {
+        "value": "10.70.60.0/24"
+      },
+      "subnet8Name": {
+        "value": "snCOM-NONPROD-CENTRAL"
+      },
+      "subnet8Prefix": {
+        "value": "10.70.100.0/24"
+      },
+      "subnet9Name": {
+        "value": "snCOM-MGMT-CENTRAL"
+      },
+      "subnet9Prefix": {
+        "value": "10.70.200.0/24"
+      },
+      "subnet10Name": {
+        "value": "GatewaySubnet"
+      },
+      "subnet10Prefix": {
+        "value": "10.70.255.0/24"
+      },
+      "subnet11Name": {
+        "value": "snCOM-APPGWPOOL-CENTRAL"
+      },
+      "subnet11Prefix": {
+        "value": "10.70.70.0/24"
+      },
+      "location": {
+        "value": "Central US"
+      },
+      "asgWeb": {
+        "value": "asgCOM-WEB-CENTRAL"
+      },
+      "asgApp": {
+        "value": "asgCOM-APP-CENTRAL"
+      },
+      "asgProc": {
+        "value": "asgCOM-PROC-CENTRAL"
+      },
+      "asgDB": {
+        "value": "asgCOM-DB-CENTRAL"
+      },
+      "nsgWebName": {
+        "value": "nsgCOM-WEB-CENTRAL"
+      },
+      "nsgAppName": {
+        "value": "nsgCOM-APP-CENTRAL"
+      },
+      "nsgDBName": {
+        "value": "nsgCOM-DB-CENTRAL"
+      },
+      "nsgProcName": {
+        "value": "nsgCOM-PROC-CENTRAL"
+      },
+      "tagValues": {
+        "value": {
+          "WVClientType": "Production",
+          "WVenvironment": "V2"
+        }
+    }
+    }
+  }

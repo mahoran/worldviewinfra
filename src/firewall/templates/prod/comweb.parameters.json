@@ -1,0 +1,142 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "networkSecurityGroupName": {
+      "value": "nsgCOMWAF"
+    },
+    "networkSecurityGroupInboundSrcIP": {
+      "value": "0.0.0.0/0"
+    },
+    "virtualNetworkName": {
+      "value": "vnetCOMMERCE-CENTRAL"
+    },    
+    "virtualNetworkRGName": {
+      "value": "rgCOMMERCE-CENTRAL"
+    },
+    "virtualNetworkAddressPrefix": {
+      "value": "10.70.0.0/16"
+    },
+    "virtualNetworkNewOrExisting": {
+      "value": "existing"
+    },
+    "MgmtSubnetName": {
+      "value": "snCOM-MGMT-CENTRAL"
+    },
+    "untrustedSubnetName": {
+      "value": "snCOM-APPGW-CENTRAL"
+    },
+    "trustedSubnetName": {
+      "value": "snCOM-WEB-CENTRAL"
+    },
+    "backendSubnetName": {
+      "value": "snCOM-WEB-CENTRAL"
+    },
+    "appGatewayName": {
+      "value": "COMWEBGW01"
+    },
+    "appGatewayDnsName": {
+      "value": "COMWEBGW01-pip"
+    },
+    "appGatewaySubnetName": {
+      "value": "snCOM-APPGWPOOL-CENTRAL"
+    },
+    "frontendCertData": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "global-myworldviewltd-certdata"
+      }
+    },
+    "frontendCertPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "global-myworldviewltd-certpassword"
+      }
+    },
+    "backendPublicKeyData": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "global-myworldviewltd-pubcertdata"
+      }
+    },    
+    "healthyStatusCodes": {
+      "value": "200-399"
+    },
+    "probeProtocol": {
+      "value": "http"
+    },
+    "probeHost": {
+      "value": "westtexas.myworldviewltd.com"
+    },
+    "probePath": {
+      "value": "/WestTexas/WVRedirect.htm"
+    },
+    "probeIntervalInSeconds": {
+      "value": 30
+    },
+    "probeTimeoutInSeconds": {
+      "value": 30
+    },
+    "probeUnhealthyThreshold": {
+      "value": 3
+    },    
+    "probePickHostNameFromBackendHttpSettings": {
+      "value": false
+    },  
+    "probeMinServersAvailable": {
+      "value": 0
+    },    
+    "CookieBasedAffinity": {
+      "value": "Enabled"
+    },
+    "logAnalyticsWorkspaceName": {
+      "value": "omsCENTRAL"
+    },
+    "logAnalyticsWorkspaceResourceGroupName": {
+      "value": "rgMGMT-CENTRAL"
+    },
+    "LogRetentionDays": {
+      "value": 30
+    },    
+    "firewallVmName": {
+      "value": "comwebfw0"
+    },
+    "firewallVmSize": {
+      "value": "Standard_D3_v2"
+    },
+    "MgmtPublicIPAddressName": {
+      "value": "comwebfw-pip"
+    },
+    "storageAccountName": {
+      "value": "comwebfwstg"
+    },
+    "storageAccountType": {
+      "value": "Standard_RAGRS"
+    },
+    "username": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "comwafusername"
+      }
+    },
+    "password": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "comwafuserpassword"
+      }
+    },
+    "storageAccountNewOrExisting": {
+      "value": "new"
+    }
+  }
+}

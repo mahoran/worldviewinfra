@@ -1,0 +1,90 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "storageAccountName": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "storage account name."
+        }
+      },      
+      "storageAccountType": {
+        "type": "string",
+        "defaultValue": "Standard_LRS",
+        "allowedValues": [
+          "Standard_LRS",
+          "Standard_GRS",
+          "Standard_RAGRS",
+          "Standard_ZRS",
+          "Premium_LRS"
+        ],
+        "metadata": {
+          "description": "Storage Account type."
+        }
+      },
+      "supportsHttpsTrafficOnly":{
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "description": "Enable or disable HTTPS requirement."
+        }
+      },
+      "blobEncryptionEnabled": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "description": "Enable or disable Blob encryption at Rest."
+        }
+      },
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      },
+      "tagValues": {
+        "type": "object",
+        "defaultValue": {
+          "Commerce": "DS4",
+          "WVClientType": "Production",
+          "WVenvironment": "V2",
+          "WVVMType": "Web"
+        }
+      }
+    },
+    "variables": {
+      "storageAccountName": "[tolower( concat('sawithsse', substring(parameters('storageAccountType'), 0, 2), uniqueString(subscription().id, resourceGroup().id) ))]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.Storage/storageAccounts",
+        "name": "[parameters('storageAccountName')]",
+        "apiVersion": "2016-12-01",
+        "location": "[parameters('location')]",
+        "tags": "[parameters('tagValues')]",
+        "sku": {
+          "name": "[parameters('storageAccountType')]"
+        },
+        "kind": "Storage",
+        "properties": {
+          "supportsHttpsTrafficOnly": "[parameters('supportsHttpsTrafficOnly')]",
+          "encryption": {
+            "keySource": "Microsoft.Storage",
+            "services": {
+              "blob": {
+                "enabled": "[parameters('blobEncryptionEnabled')]"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outputs": {
+      "storageAccountName": {
+        "type": "string",
+        "value": "[variables('storageAccountName')]"
+      }
+    }
+  }

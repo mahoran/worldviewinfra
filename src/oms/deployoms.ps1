@@ -1,0 +1,2 @@
+#Provision Prod Key Vault
+New-AzureRmResourceGroupDeployment -Name omsprod -ResourceGroupName rgMGMT-CENTRAL -TemplateFile ./createoms.json -TemplateParameterFile ./prod/oms.parameters.json -DeploymentDebugLogLevel All

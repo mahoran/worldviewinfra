@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "vaultName": {
+        "value": "rsvCOM-CENTRAL"
+      },
+      "policyName": {
+          "value": "COM-FTP-backups"
+      },
+      "scheduleRunTimes": {
+          "value": [ "2018-10-05T00:00:00Z" ]
+      },
+      "timeZone": {
+          "value": "Central Standard Time"
+      },
+      "dailyRetentionDurationCount": {
+          "value": 5
+      },
+      "daysOfTheWeek": {
+          "value": [ "Monday", "Wednesday", "Friday" ]
+      },
+      "weeklyRetentionDurationCount": {
+          "value": 4
+      },
+      "monthlyRetentionDurationCount": {
+          "value": 60
+      },
+      "monthsOfYear": {
+          "value": [ "January", "March", "August" ]
+      },
+      "yearlyRetentionDurationCount": {
+          "value": 10
+      }
+    }
+  }

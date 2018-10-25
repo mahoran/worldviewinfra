@@ -1,0 +1,76 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "newStorageAccount": {
+      "value": "admminftpfwstg"
+    },
+    "storageAccountType": {
+      "value": "Standard_RAGRS"
+    },
+    "storageAccountNewOrExisting": {
+      "value": "new"
+    },
+    "existingStorageAccountRG": {
+      "value": "rgADMIN-ADMINFW-CENTRAL"
+    },
+    "dnsNameForPublicIP": {
+      "value": "adminftpfw-pip"
+    },
+    "dnsNameForPublicIPUntrust": {
+      "value": "adminftppubfw-pip"
+    },
+    "vmName": {
+      "value": "adminftpfw1"
+    },
+    "adminUserName": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "comwafusername"
+      }
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+        },
+        "secretName": "comwafuserpassword"
+      }
+    },
+    "authenticationType": {
+      "value": "password"
+    },
+    "vmSize": {
+      "value": "Standard_D3_v2"
+    },
+    "srcIPInboundNSG": {
+      "value": "0.0.0.0/0"
+    },
+    "virtualNetworkName": {
+      "value": "WVV2-ADMIN-VNET"
+    },    
+    "virtualNetworkRGName": {
+      "value": "WVV2-ADMIN-NETWORK"
+    },
+    "virtualNetworkAddressPrefix": {
+      "value": "10.0.0.0/16"      
+    },
+    "mgtSubnetName": {
+      "value": "snADMIN-MGMT-CENTRAL"
+    },
+    "untrustSubnetName": {
+      "value": "snADMIN-UNTRUST-CENTRAL"
+    },
+    "trustSubnetName": {
+      "value": "MOVE-IT_DMZ"
+    },
+    "FWPrivateIPAddressUntrust": {
+      "value": "10.0.2.100"
+    },
+    "FWPrivateIPAddressTrust": {
+      "value": "10.0.3.101"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyVaultName": {
+            "value": "worldviewltdprod-kv"
+        },
+        "tenantId": {
+            "value": "0accd808-021d-4f99-8dae-2b2d11454a48"
+        },
+        "logAnalyticsWorkspaceName": {
+            "value": "omsCENTRAL"
+          },
+          "logAnalyticsWorkspaceResourceGroupName": {
+            "value": "rgMGMT-CENTRAL"
+          },
+          "LogRetentionDays": {
+            "value": 30
+          },            
+        "accessPolicies": {
+            "value": [
+                {
+                    "tenantId": "0accd808-021d-4f99-8dae-2b2d11454a48",
+                    "objectId": "e79eb703-2d1d-42ab-8032-bb2fe71ce94c",
+                    "permissions": {
+                        "keys": ["all"],
+                        "secrets": ["all"]
+                    }
+                },
+                {
+                    "tenantId": "0accd808-021d-4f99-8dae-2b2d11454a48",
+                    "objectId": "99e27233-31ac-418f-a144-c93a1b03a160",
+                    "permissions": {
+                        "keys": ["all"],
+                        "secrets": ["all"]
+                    }
+                },
+                {
+                    "tenantId": "0accd808-021d-4f99-8dae-2b2d11454a48",
+                    "objectId": "4799f45a-8173-480c-aa95-300508e65bd3",
+                    "permissions": {
+                        "keys": ["all"],
+                        "secrets": ["all"]
+                    }
+                },
+                {
+                    "tenantId": "0accd808-021d-4f99-8dae-2b2d11454a48",
+                    "objectId": "31f3b7ea-19e4-4b32-ab80-2f64890e44cd",
+                    "permissions": {
+                        "keys": ["all"],
+                        "secrets": ["all"]
+                    }
+                }
+            ]
+        }
+    }
+}

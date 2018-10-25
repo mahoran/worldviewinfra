@@ -1,0 +1,112 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "existingVNETName": {
+        "value": "WVV2-ADMIN-VNET"
+      },
+      "existingSubnetName": {
+        "value": "MOVE-IT_DMZ"
+      },
+      "existingVNETRGName": {
+        "value": "WVV2-ADMIN-NETWORK"
+      },      
+      "vmSize": {
+        "value": "Standard_D8s_v3"
+      },
+      "domainToJoin": {
+        "value": "wv.local"
+      },
+      "domainUsername": {
+        "value": "domainattach"
+      },
+      "domainPassword": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+          },
+          "secretName": "domainattach"
+        }
+      },
+      "domainJoinOptions": {
+        "value": 3
+      },
+      "ouPath": {
+        "value": "OU=AzureFTP,OU=Computers,OU=WVAzure,DC=wv,DC=local"
+      },
+      "vmAdminUsername": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+          },
+          "secretName": "comwebadminuser"
+        }
+      },
+      "vmAdminPassword": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+          },
+          "secretName": "comwebadminpassword"
+        }
+      },
+      "numDataDisks": {
+        "value": 6
+      },
+      "dataDiskSizeGB": {
+        "value": 1024 
+      },
+      "vmCount": {
+        "value": 2 
+      },
+      "vmNamePrefix": {
+        "value": "MOVE-ITgw" 
+      },     
+      "commandToExecute": {
+        "value": "powershell -ExecutionPolicy Unrestricted -File setupftpserver.ps1"
+      },
+      "customScriptFileURIs": {
+        "value": [
+          "https://worldviewartf02.blob.core.windows.net/iaas/setupftpserver.ps1"
+        ]
+      },
+      "lbPrivateIP": {
+        "value": "10.0.3.100" 
+      },
+      "workspaceName": {
+          "value": "WorldView-Analytics"
+      },
+      "workspaceResourceGroup": {
+          "value": "commerce"
+      },
+      "tagValues": {
+        "value": {
+          "WVClientType": "Production",
+          "WVenvironment": "V1",
+          "WVVMType": "FTP",
+          "Commerce": "D8S"
+            }
+        },
+        "vaultName": {
+            "value": "rsvCOM-CENTRAL"
+          },
+          "vaultRGName": {
+            "value": "rgCOM-WEB-CENTRAL"
+          },
+          "backupPolicyName": {
+              "value": "COM-FTP-backups"
+          },
+          "existingdiagnosticsStorageAccountName": {
+            "value": "admindiag1v2"
+          },
+          "existingdiagnosticsStorageResourceGroup": {
+            "value": "wvv2-admin-domain"
+          },
+          "customScriptStorageAccountName": {
+            "value": "worldviewartf02"
+          },
+          "customScriptStorageResourceGroup": {
+            "value": "rgAdmin"
+          }
+    }
+}

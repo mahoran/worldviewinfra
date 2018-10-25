@@ -1,0 +1,2 @@
+#Provision Prod Key Vault
+New-AzureRmResourceGroupDeployment -Name kvprod -ResourceGroupName rgMGMT-CENTRAL -TemplateFile ./createkv.json -TemplateParameterFile ./prod/prod.parameters.json -DeploymentDebugLogLevel All

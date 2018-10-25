@@ -1,0 +1,2 @@
+#Provision Prod Key Vault
+New-AzureRmResourceGroupDeployment -Name comvnetprod -ResourceGroupName rgCOMMERCE-CENTRAL -TemplateFile ./createvnet.json -TemplateParameterFile ./prod/vnet.commerce.json -DeploymentDebugLogLevel All

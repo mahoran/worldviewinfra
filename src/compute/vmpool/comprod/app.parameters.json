@@ -1,0 +1,122 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "existingVNETName": {
+        "value": "vnetCOMMERCE-CENTRAL"
+      },
+      "existingSubnetName": {
+        "value": "snCOM-APP-CENTRAL"
+      },
+      "existingVNETRGName": {
+        "value": "rgCOMMERCE-CENTRAL"
+      },      
+      "vmSize": {
+        "value": "Standard_D2s_v3"
+      },
+      "domainToJoin": {
+        "value": "wv.local"
+      },
+      "domainUsername": {
+        "value": "domainattach"
+      },
+      "domainPassword": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+          },
+          "secretName": "domainattach"
+        }
+      },
+      "domainJoinOptions": {
+        "value": 3
+      },
+      "ouPath": {
+        "value": "OU=AzureApp,OU=Computers,OU=WVAzure,DC=wv,DC=local"
+      },
+      "vmAdminUsername": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+          },
+          "secretName": "comwebadminuser"
+        }
+      },
+      "vmAdminPassword": {
+        "reference": {
+          "keyVault": {
+            "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+          },
+          "secretName": "comwebadminpassword"
+        }
+      },
+      "dataDiskSizeGB": {
+        "value": 1024 
+      },
+      "vmCount": {
+        "value": 2 
+      },
+      "vmNamePrefix": {
+        "value": "COMPOOL2APP" 
+      },
+      "imageName": {
+        "value": "BaseWin2016Oct18-img"
+      },
+      "imageResourceGroup": {
+        "value": "rgSHARED-CENTRAL"
+      }, 
+      "commandToExecute": {
+        "value": "powershell -ExecutionPolicy Unrestricted -File setupserver.ps1"
+      },
+      "customScriptFileURIs": {
+        "value": [
+          "https://worldviewartf01.blob.core.windows.net/iaas/setupserver.ps1"
+        ]
+      },            
+      "lbPrivateIP": {
+        "value": "10.70.40.100" 
+      },
+      "probeProtocol": {
+        "value": "HTTPS"
+      },
+      "probeRequestPath": {
+        "value": "/westtexas/appserver/service.asmx"
+      },      
+      "workspaceName": {
+          "value": "omsCENTRAL"
+      },
+      "workspaceResourceGroup": {
+          "value": "rgMGMT-CENTRAL"
+      },
+      "tagValues": {
+        "value": {
+          "WVClientType": "Production",
+          "WVenvironment": "V2",
+          "WVVMType": "App",
+          "Commerce": "DS2"
+            }
+        },
+        "vaultName": {
+            "value": "rsvCOM-CENTRAL"
+          },
+          "vaultRGName": {
+            "value": "rgCOM-WEB-CENTRAL"
+          },
+          "backupPolicyName": {
+              "value": "COM-APP-backups"
+          },
+          "existingdiagnosticsStorageAccountName": {
+            "value": "worldviewcomdiag01"
+          },
+          "existingdiagnosticsStorageResourceGroup": {
+            "value": "rgMGMT-CENTRAL"
+          },
+          "customScriptStorageAccountName": {
+            "value": "worldviewartf01"
+          },
+          "customScriptStorageResourceGroup": {
+            "value": "rgMGMT-CENTRAL"
+          }
+
+    }
+}

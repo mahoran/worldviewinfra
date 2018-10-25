@@ -1,0 +1,3 @@
+#Provision storage account to store templates
+New-AzureRmResourceGroupDeployment -Name comstorageprod -ResourceGroupName rgMGMT-CENTRAL -TemplateFile .\createstorageaccount.json -TemplateParameterFile .\storage.comdiag.json -DeploymentDebugLogLevel All
+New-AzureRmResourceGroupDeployment -Name artfstorageprod -ResourceGroupName rgMGMT-CENTRAL -TemplateFile .\createstorageaccount.json -TemplateParameterFile .\storage.comartf.json -DeploymentDebugLogLevel All

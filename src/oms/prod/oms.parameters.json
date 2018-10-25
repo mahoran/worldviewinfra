@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "omsRecoveryVaultName": {
+            "value": "rsvCENTRAL"
+        },
+        "omsRecoveryVaultRegion": {
+            "value": "Central US"
+        },
+        "omsWorkspaceName": {
+            "value": "omsCENTRAL"
+        },
+        "omsWorkspaceRegion": {
+            "value": "East US"
+        },
+        "omsAutomationAccountName": {
+            "value": "worldviewltd-aa"
+        },
+        "omsAutomationRegion": {
+            "value": "South Central US"
+        },
+        "azureAdminPwd": {
+            "reference": {
+                "keyVault": {
+                  "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+                },
+                "secretName": "azureautomationadminusername"
+              }
+        },
+        "azureAdmin": {
+            "reference": {
+                "keyVault": {
+                  "id": "/subscriptions/d387ee22-63eb-4f23-8d7d-839f802b2260/resourceGroups/rgMGMT-CENTRAL/providers/Microsoft.KeyVault/vaults/worldviewltdprod-kv"
+                },
+                "secretName": "azureautomationadminuserpassword"
+              }
+        },
+        "_artifactsLocation": {
+            "value": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/oms-all-deploy"
+        }
+    }
+}

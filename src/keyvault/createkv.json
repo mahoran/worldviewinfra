@@ -1,0 +1,132 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "keyVaultName": {
+        "type": "string",
+        "metadata": {
+          "description": "Name of the Key Vault"
+        }
+      },
+      "tenantId": {
+        "type": "string",
+        "metadata": {
+          "description": "Tenant Id for the subscription and use assigned access to the vault. Available from the Get-AzureRMSubscription PowerShell cmdlet"
+        }
+      },
+      "accessPolicies": {
+        "type": "array",
+        "defaultValue": "{}",
+        "metadata": {
+          "description": "Access policies object {\"tenantId\":\"\",\"objectId\":\"\",\"permissions\":{\"keys\":[\"\"],\"secrets\":[\"\"]}}"
+        }
+      },
+      "vaultSku": {
+        "type": "string",
+        "defaultValue": "Standard",
+        "allowedValues": [
+          "Standard",
+          "Premium"
+        ],
+        "metadata": {
+          "description": "SKU for the vault"
+        }
+      },
+      "enabledForDeployment": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "description": "Specifies if the vault is enabled for VM or Service Fabric deployment"
+        }
+      },
+      "enabledForTemplateDeployment": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "description": "Specifies if the vault is enabled for ARM template deployment"
+        }
+      },
+      "enableVaultForVolumeEncryption": {
+        "type": "bool",
+        "defaultValue": true,
+        "metadata": {
+          "description": "Specifies if the vault is enabled for volume encryption"
+        }
+      },
+      "logAnalyticsWorkspaceName": {
+        "type": "string",
+        "metadata": {
+            "description": "Name of existing Log Analytics workspace to send diagnostic data to"
+        }
+      },
+      "logAnalyticsWorkspaceResourceGroupName": {
+        "type": "string",
+        "metadata": {
+            "description": "Name of the Resource Group in which the existing Log Analytics workspace is in"
+        }
+      },    
+      "LogRetentionDays": {
+        "type": "int",
+        "defaultValue": 30,
+        "metadata": {
+            "description": "Number of days to store diagnostic logs in storage account"
+        }
+      }, 
+      "location": {
+        "type": "string",
+        "defaultValue": "[resourceGroup().location]",
+        "metadata": {
+          "description": "Location for all resources."
+        }
+      }
+    },
+    "variables": {
+      "workspaceId": "[resourceId(subscription().subscriptionId,parameters('logAnalyticsWorkspaceResourceGroupName'),'Microsoft.OperationalInsights/workspaces/',parameters('logAnalyticsWorkspaceName'))]"
+    },
+    "resources": [
+      {
+        "type": "Microsoft.KeyVault/vaults",
+        "name": "[parameters('keyVaultName')]",
+        "apiVersion": "2015-06-01",
+        "location": "[parameters('location')]",
+        "tags": {
+          "displayName": "KeyVault"
+        },
+        "properties": {
+          "enabledForDeployment": "[parameters('enabledForDeployment')]",
+          "enabledForTemplateDeployment": "[parameters('enabledForTemplateDeployment')]",
+          "enabledForVolumeEncryption": "[parameters('enableVaultForVolumeEncryption')]",
+          "tenantId": "[parameters('tenantId')]",
+          "accessPolicies": "[parameters('accessPolicies')]",
+          "sku": {
+            "name": "[parameters('vaultSku')]",
+            "family": "A"
+          }
+        },
+        "resources": [
+          {
+            "type": "Microsoft.KeyVault/vaults/providers/diagnosticsettings",
+            "name": "[concat(parameters('keyVaultName'), '/Microsoft.Insights/service')]",
+            "apiVersion": "2016-09-01",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+              "[concat('Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]"
+            ],
+            "properties": {
+              "workspaceId": "[variables('workspaceId')]",
+              "logs": [
+                {
+                  "category": "AuditEvent",
+                  "enabled": true,
+                  "retentionPolicy": {
+                    "enabled": true,
+                    "days": "[parameters('LogRetentionDays')]"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
